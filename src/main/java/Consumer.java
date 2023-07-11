@@ -19,7 +19,7 @@ public class Consumer {
         consumer.setNamesrvAddr("192.168.253.144:9876");
         //订阅 order下的所有消息
         consumer.subscribe("order","*");
-        //注册消息监听器
+        //注册消息监听器 ，主要使用匿名内部类进行创建
         consumer.registerMessageListener(new MessageListenerConcurrently()  {
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
                 for (MessageExt msg :
@@ -41,14 +41,16 @@ public class Consumer {
                              * 订单更新
                              * 数据更新...
                              * */
+                        }else if (msg.getTags().equals("Exitshirt")){
+                            System.out.println("处理退货的相关业务操作...."+msg);
                         }
                     }
                 }
-                //返回成功状态
+                //返回成功状态 即对消息进行消费完成再返回成功状态
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
-
+        //消费者是一直处于监听状态
         consumer.start();
     }
 }
