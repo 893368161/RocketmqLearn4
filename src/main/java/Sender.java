@@ -13,7 +13,7 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
-
+//这是完成一次修改后提交效果
 public class Sender {
     public static void main(String[] args)throws Exception{
         //发送给broker再由broker
